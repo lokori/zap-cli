@@ -27,6 +27,7 @@ class ZAPHelperTestCase(unittest.TestCase):
 
     def setUp(self):
         self.zap_helper = zap_helper.ZAPHelper(api_key=self.api_key)
+        self.zap_helper._status_check_sleep = 0
 
     @data(
         (
@@ -218,7 +219,7 @@ class ZAPHelperTestCase(unittest.TestCase):
         class_mock.status = status
         self.zap_helper.zap.spider = class_mock
 
-        self.zap_helper.run_spider('http://localhost', status_check_sleep=0)
+        self.zap_helper.run_spider('http://localhost')
 
     def test_run_spider_error(self):
         """Test running the spider when an error occurs."""
@@ -227,7 +228,7 @@ class ZAPHelperTestCase(unittest.TestCase):
         self.zap_helper.zap.spider = class_mock
 
         with self.assertRaises(ZAPError):
-            self.zap_helper.run_spider('http://localhost', status_check_sleep=0)
+            self.zap_helper.run_spider('http://localhost')
 
     def test_run_active_scan(self):
         """Test running an active scan."""
@@ -243,7 +244,7 @@ class ZAPHelperTestCase(unittest.TestCase):
         class_mock.status = status
         self.zap_helper.zap.ascan = class_mock
 
-        self.zap_helper.run_active_scan('http://localhost', status_check_sleep=0)
+        self.zap_helper.run_active_scan('http://localhost')
 
     def test_run_active_scan_error(self):
         """Test running an active scan."""
@@ -276,7 +277,7 @@ class ZAPHelperTestCase(unittest.TestCase):
         type(class_mock).status = status
         self.zap_helper.zap.ajaxSpider = class_mock
 
-        self.zap_helper.run_ajax_spider('http://localhost', status_check_sleep=0)
+        self.zap_helper.run_ajax_spider('http://localhost')
 
     @data(
         (

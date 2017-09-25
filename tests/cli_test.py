@@ -110,7 +110,7 @@ class ZAPCliTestCase(unittest.TestCase):
     def test_spider_url(self, helper_mock):
         """Test spider URL method."""
         result = self.runner.invoke(cli.cli, ['--boring', '--api-key', '', 'spider', 'http://localhost/'])
-        helper_mock.assert_called_with('http://localhost/')
+        helper_mock.assert_called_with('http://localhost/', None, None)
         self.assertEqual(result.exit_code, 0)
 
     @patch('zapcli.zap_helper.ZAPHelper.run_spider')
